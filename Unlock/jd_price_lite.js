@@ -47,7 +47,8 @@ function priceSummary(data) {
     let summary = ""
     let listPriceDetail = data.PriceRemark.ListPriceDetail
     listPriceDetail.pop()
-    listPriceDetail.forEach((item, index) => {
+    let list = listPriceDetail.concat(historySummary(data.single))
+    list.forEach((item, index) => {
         if (index == 2) {
             item.Name = "双十一价格"
         } else if (index == 3) {
@@ -57,9 +58,6 @@ function priceSummary(data) {
         }
         summary += `\n${item.Name}   ${item.Price}   ${item.Date}   ${item.Difference}`
     })
-    historySummary(data.single).forEach((item) => {
-        summary += `\n${item.Name}   ${item.Price}   ${item.Date}   ${item.Difference}`
-    });
     return summary
 }
 
@@ -81,19 +79,19 @@ function historySummary(single) {
                 lowest180 = { Name: "一百八最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
                 lowest360 = { Name: "三百六最低", Price: `¥${String(price)}`, Date: date, Difference: difference(currentPrice, price), price }
             }
-            if (index < 60 && price < lowest60.price) {
+            if (index < 60 && price <= lowest60.price) {
                 lowest60.price = price
                 lowest60.Price = `¥${String(price)}`
                 lowest60.Date = date
                 lowest60.Difference = difference(currentPrice, price)
             }
-            if (index < 180 && price < lowest180.price) {
+            if (index < 180 && price <= lowest180.price) {
                 lowest180.price = price
                 lowest180.Price = `¥${String(price)}`
                 lowest180.Date = date
                 lowest180.Difference = difference(currentPrice, price)
             }
-            if (index < 360 && price < lowest360.price) {
+            if (index < 360 && price <= lowest360.price) {
                 lowest360.price = price
                 lowest360.Price = `¥${String(price)}`
                 lowest360.Date = date
@@ -105,7 +103,7 @@ function historySummary(single) {
 }
 
 function difference(currentPrice, price) {
-    let difference = strip(currentPrice - price)
+    let difference = sub(currentPrice, price)
     if (difference == 0) {
         return "-"
     } else {
@@ -113,8 +111,18 @@ function difference(currentPrice, price) {
     }
 }
 
-function strip(num, precision = 12) {
-    return +parseFloat(num.toPrecision(precision));
+function sub(arg1, arg2) {
+    return add(arg1, -Number(arg2), arguments[2]);
+}
+
+function add(arg1, arg2) {
+    arg1 = arg1.toString(), arg2 = arg2.toString();
+    var arg1Arr = arg1.split("."), arg2Arr = arg2.split("."), d1 = arg1Arr.length == 2 ? arg1Arr[1] : "", d2 = arg2Arr.length == 2 ? arg2Arr[1] : "";
+    var maxLen = Math.max(d1.length, d2.length);
+    var m = Math.pow(10, maxLen);
+    var result = Number(((arg1 * m + arg2 * m) / m).toFixed(maxLen));
+    var d = arguments[2];
+    return typeof d === "number" ? Number((result).toFixed(d)) : result;
 }
 
 function request_history_price(share_url, callback) {
@@ -124,7 +132,7 @@ function request_history_price(share_url, callback) {
             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
             "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 - mmbWebBrowse - ios"
         },
-        body: "methodName=getHistoryTrend&p_url=" + encodeURIComponent("http://m.manmanbuy.com/redirect.aspx?webid=1&tourl=" + share_url)
+        body: "methodName=getHistoryTrend&p_url=" + encodeURIComponent(share_url)
     }
     $tool.post(options, function (error, response, data) {
         if (!error) {
