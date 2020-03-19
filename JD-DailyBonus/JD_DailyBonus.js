@@ -80,7 +80,7 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JingDongWomen(stop); //京东女装馆
   await JingDongCash(stop); //京东现金红包
   await JingDongShoes(stop); //京东鞋靴馆
-  //await JingRSeeAds(stop); //金融看广告
+  await JingRSeeAds(stop); //金融看广告
   await JingRongGame(stop); //金融游戏大厅
   await JingDongLive(stop); //京东智能生活馆
   await JingDongClean(stop); //京东清洁馆
