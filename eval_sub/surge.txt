@@ -1,113 +1,117 @@
-hostname=api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,api.m.jd.com,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com,music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com
+#!name=eval_script.js module
 
-http-response ^https:\/\/photos\.adobe\.io\/v2\/accounts* requires-body=1,script-path=eval_script.js
+[MITM]
+hostname = %INSERT% api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,api.m.jd.com,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com,music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com
 
-http-response ^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig) requires-body=1,script-path=eval_script.js
+[Script]
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/photos\.adobe\.io\/v2\/accounts*,script-path=eval_script.js
 
-http-response ^http://amdc\.m\.taobao\.com/amdc/mobileDispatch requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig),script-path=eval_script.js
 
-http-response ^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^http://amdc\.m\.taobao\.com/amdc/mobileDispatch,script-path=eval_script.js
 
-http-response ^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail,script-path=eval_script.js
 
-http-response ^https?://m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|searchall|cardlist|page|!/photos/pic_recommend_status) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua),script-path=eval_script.js
 
-http-response ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?://m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|searchall|cardlist|page|!/photos/pic_recommend_status),script-path=eval_script.js
 
-http-response ^https?:\/\/api\.zhihu\.com\/(moments\?(action|feed_type)|topstory\/recommend|.*\/questions|market\/header|people) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad,script-path=eval_script.js
 
-http-response ^https://aweme-eagle(.*)\.snssdk\.com\/aweme/.+/(feed|aweme/post|follow/feed)/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/api\.zhihu\.com\/(moments\?(action|feed_type)|topstory\/recommend|.*\/questions|market\/header|people),script-path=eval_script.js
 
-http-response ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https://aweme-eagle(.*)\.snssdk\.com\/aweme/.+/(feed|aweme/post|follow/feed)/,script-path=eval_script.js
 
-http-response https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice),script-path=eval_script.js
 
-http-response ^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData),script-path=eval_script.js
 
-http-response ^https?:\/\/p\.du\.163\.com\/gain\/readtime\/info\.json requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index),script-path=eval_script.js
 
-http-response ^https?:\/\/getuserinfo\.321mh\.com\/app_api\/v5\/getuserinfo\/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/p\.du\.163\.com\/gain\/readtime\/info\.json,script-path=eval_script.js
 
-http-response ^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coin_account|getuserinfo_ticket|getcomicinfo)/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/getuserinfo\.321mh\.com\/app_api\/v5\/getuserinfo\/,script-path=eval_script.js
 
-http-response ^https?:\/\/api\.bilibili\.com\/pgc\/player\/api\/playurl requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coin_account|getuserinfo_ticket|getcomicinfo)/,script-path=eval_script.js
 
-http-response ^https?:\/\/vsco\.co\/api\/subscriptions\/2.1\/user-subscriptions\/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/api\.bilibili\.com\/pgc\/player\/api\/playurl,script-path=eval_script.js
 
-http-response ^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/vsco\.co\/api\/subscriptions\/2.1\/user-subscriptions\/,script-path=eval_script.js
 
-http-response ^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners),script-path=eval_script.js
 
-http-response ^https://sp\.kaola\.com/api/openad$ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$,script-path=eval_script.js
 
-http-response ^https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https://sp\.kaola\.com/api/openad$,script-path=eval_script.js
 
-http-response ^https?:\/\/.*\.(fuli|xiang(jiao|xiang))apps\.com\/(ucp\/index|getGlobalData|.+\/reqplay\/) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList),script-path=eval_script.js
 
-http-response ^https?:\/\/(i|newdrugs)\.dxy\.cn\/(snsapi\/username\/|app\/user\/(pro\/stat\?|init\?timestamp=)) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/.*\.(fuli|xiang(jiao|xiang))apps\.com\/(ucp\/index|getGlobalData|.+\/reqplay\/),script-path=eval_script.js
 
-http-response ^https?:\/\/(.+)\.(\w{2,3})(:?\d*)\/(api\/public\/\?service=Live\.checkLive$|public\/\/\?service=Live\.roomCharge$|lg\/video\/loadVideoFees\.do$) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/(i|newdrugs)\.dxy\.cn\/(snsapi\/username\/|app\/user\/(pro\/stat\?|init\?timestamp=)),script-path=eval_script.js
 
-http-response ^https:\/\/www\.luqijianggushi\.com\/api\/v2\/user\/get requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/(.+)\.(\w{2,3})(:?\d*)\/(api\/public\/\?service=Live\.checkLive$|public\/\/\?service=Live\.roomCharge$|lg\/video\/loadVideoFees\.do$),script-path=eval_script.js
 
-http-response ^https://account.wps.cn/api/users/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/www\.luqijianggushi\.com\/api\/v2\/user\/get,script-path=eval_script.js
 
-http-response ^https:\/\/api\.gyrosco\.pe\/v1\/account\/$ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https://account.wps.cn/api/users/,script-path=eval_script.js
 
-http-response ^https:\/\/api1\.dobenge\.cn\/api\/user\/getuserinfo requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api\.gyrosco\.pe\/v1\/account\/$,script-path=eval_script.js
 
-http-response ^https:\/\/api\.mvmtv\.com\/index\.php.*(c=user.*a=info|a=addr.*vid=.*) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api1\.dobenge\.cn\/api\/user\/getuserinfo,script-path=eval_script.js
 
-http-response ^https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api\.mvmtv\.com\/index\.php.*(c=user.*a=info|a=addr.*vid=.*),script-path=eval_script.js
 
-http-response https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user,script-path=eval_script.js
 
-http-response ^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/,script-path=eval_script.js
 
-http-response ^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip,script-path=eval_script.js
 
-http-response ^https:\/\/biz\.caiyunapp\.com\/v2\/user\?app_name\=weather requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status,script-path=eval_script.js
 
-http-response ^https:\/\/api\.gotokeep\.com\/(.+\/subject|.+\/dynamic) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/biz\.caiyunapp\.com\/v2\/user\?app_name\=weather,script-path=eval_script.js
 
-http-response ^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\? requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api\.gotokeep\.com\/(.+\/subject|.+\/dynamic),script-path=eval_script.js
 
-http-response ^https:\/\/api\.vuevideo\.net\/api\/v1\/(users\/.+\/profile|subtitle\/prepare) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\?,script-path=eval_script.js
 
-http-response ^https?:\/\/mp\.bybutter\.com\/mood\/(official-templates|privileges) requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api\.vuevideo\.net\/api\/v1\/(users\/.+\/profile|subtitle\/prepare),script-path=eval_script.js
 
-http-response ^https:\/\/api\.(picsart|meiease)\.c(n|om)\/users\/show\/me\.json requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https?:\/\/mp\.bybutter\.com\/mood\/(official-templates|privileges),script-path=eval_script.js
 
-http-response ^https:\/\/splice\.oracle\.\w+\.com\/devices\/me requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/api\.(picsart|meiease)\.c(n|om)\/users\/show\/me\.json,script-path=eval_script.js
 
-http-response ^https:\/\/education\.github\.com\/api\/user$ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/splice\.oracle\.\w+\.com\/devices\/me,script-path=eval_script.js
 
-http-response https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/education\.github\.com\/api\/user$,script-path=eval_script.js
 
-http-request ^https?:\/\/music\.163\.com script-path=eval_script.js
+eval_script.js = type=http-response,requires-body=1,pattern=https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user,script-path=eval_script.js
 
-http-request ^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.* script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https?:\/\/music\.163\.com,script-path=eval_script.js
 
-http-request ^https:\/\/www\.smzdm\.com\/?.? script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.*,script-path=eval_script.js
 
-http-request https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/www\.smzdm\.com\/?.?,script-path=eval_script.js
 
-http-request https?:\/\/.*\.iqiyi\.com\/.*authcookie= script-path=eval_script.js
+eval_script.js = type=http-request,pattern=https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login,script-path=eval_script.js
 
-http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean script-path=eval_script.js
+eval_script.js = type=http-request,pattern=https?:\/\/.*\.iqiyi\.com\/.*authcookie=,script-path=eval_script.js
 
-http-request ^https:\/\/credits.bz.mgtv.com\/user\/creditsTake script-path=eval_script.js
+eval_script.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=eval_script.js
 
-http-request ^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/credits.bz.mgtv.com\/user\/creditsTake,script-path=eval_script.js
 
-http-request ^https://node\.kg\.qq\.com/webapp/proxy? requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,script-path=eval_script.js
 
-http-request ^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index script-path=eval_script.js
+eval_script.js = type=http-request,requires-body=1,pattern=^https://node\.kg\.qq\.com/webapp/proxy?,script-path=eval_script.js
 
-http-request ^https:\/\/passport.suning.com\/ids\/login$ requires-body=1,script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index,script-path=eval_script.js
 
-http-request ^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do script-path=eval_script.js
+eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/passport.suning.com\/ids\/login$,script-path=eval_script.js
 
-http-request ^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do,script-path=eval_script.js
 
-http-request ^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do) script-path=eval_script.js
+eval_script.js = type=http-request,pattern=^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do),script-path=eval_script.js
