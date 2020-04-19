@@ -1,6 +1,5 @@
 const __conf = String.raw`
 
-
 [Remote]
 // custom remote...
 https://raw.githubusercontent.com/yichahucha/surge/master/sub_script.conf
@@ -8,20 +7,21 @@ https://raw.githubusercontent.com/markwhitey/QXScripts/master/Rewrite_remote.con
 
 https://raw.githubusercontent.com/markwhitey/QXScripts/master/Cookie_remote.conf
 
+
 [Local]
 // custom local...
 
 
+
 [Hostname]
 // custom hostname...
-// www.baidu.com, www.google.com
 
 
 `
 
-// 是否开启 GitHub 更新
+// 是否更新 GitHub（如果开启 true，需配置 token 或 账号密码）
 const __isUpdateGithub = true
-// GitHub Token（如果使用账号密码 Token 请设置为空 ""）
+// GitHub Token（如果使用账号密码 token 请设置为空 ""）
 const __token = "4ce86c84eab9c205cc06672e3031b9c68752036d"
 // GitHub 账号
 const __username = "ic1191426191@outlook.com"
@@ -34,18 +34,21 @@ const __repo = "QXScripts"
 // GitHub 分支（不指定就使用默认分支）
 const __branch = "master"
 // GitHub 文件路径（没有文件新创建，已有文件覆盖更新，路径为空 "" 不更新）
-const __quanxPath = "eval_sub/quanx.txt"
-const __surgePath = "eval_sub/surge.txt"
+const __quanxPath = "eval_script/qx_script.txt" // qaunx 远程重写格式文件
+const __surgePath = "eval_script/sg_script.sgmodule" // surge 脚本模块格式文件
+// GitHub 更新日志
 // GitHub 更新日志
 const __quanxCommit = "update"
 const __surgeCommit = "update"
 
-const __emoji = "• "
-const __emojiDone = "✔️"
-const __emojiTasks = "🕐"
+const __emojiDone = ""
 const __emojiFail = "🙃"
 const __emojiSuccess = "😀"
-const __showLine = 20
+const __emojiTasks = "🕐"
+const __emojiUpdateSuccess = "🟢"
+const __emojiUpdateFail = "🟠 "
+const __emojiGitHub = "🔵"
+const __showLine = 15
 
 const __log = false
 const __debug = false
@@ -141,7 +144,7 @@ if (__tool.isTask) {
                         })
                     } else {
                         __tool.write(url, url)
-                        resolve({ body: url, url, message: `${__emoji}${url} function set success` })
+                        resolve({ body: url, url, message: `${__emojiUpdateSuccess}${url} function set successfully` })
                     }
                 })
             })
@@ -155,9 +158,10 @@ if (__tool.isTask) {
         //update github
         .then(() => {
             if (__isUpdateGithub) {
-                const hostname = `${storeObj.confHostnames.length > 0 ? `hostname=${Array.from(new Set(storeObj.confHostnames)).join(",")}` : ""}`
-                const quanxUpdateContent = `${hostname}\n\n${Array.from(new Set(storeObj.quanxConfContents)).join("\n\n")}`
-                const surgeUpdateContent = `${hostname}\n\n${Array.from(new Set(storeObj.surgeConfContents)).join("\n\n")}`
+                const quanxHostname = `${storeObj.confHostnames.length > 0 ? `hostname = ${Array.from(new Set(storeObj.confHostnames)).join(",")}` : ""}`
+                const surgeHostname = `${storeObj.confHostnames.length > 0 ? `hostname = %INSERT% ${Array.from(new Set(storeObj.confHostnames)).join(",")}` : ""}`
+                const quanxUpdateContent = `${quanxHostname}\n\n${Array.from(new Set(storeObj.quanxConfContents)).join("\n\n")}`
+                const surgeUpdateContent = `#!name=eval_script.js module\n\n[MITM]\n${surgeHostname}\n\n[Script]\n${Array.from(new Set(storeObj.surgeConfContents)).join("\n\n")}`
                 const args = [{ path: __quanxPath, content: quanxUpdateContent, commit: __quanxCommit }, { path: __surgePath, content: surgeUpdateContent, commit: __surgeCommit }]
                 console.log("Start updating github...")
                 const update = async () => {
@@ -183,8 +187,8 @@ if (__tool.isTask) {
                 let message = ""
                 if (githubResults && githubResults.length > 0) {
                     githubResults.forEach((result, index) => {
-                        if (index == 0) message = "🟢" + result.message
-                        message += message.length > 0 ? "\n" + result.url : result.url
+                        if (index == 0) message = result.message
+                        message += message.length > 0 ? "\n" + __emojiGitHub + result.url : __emojiGitHub + result.url
                     });
                 }
                 return message
@@ -203,12 +207,13 @@ if (__tool.isTask) {
                 return { message, count: { success, fail } }
             })()
             const messages = resultInfo.message.split("\n")
-            const detail = `${messages.slice(0, __showLine).join("\n")}${messages.length > 20 ? `\n${__emoji}......` : ""}`
-            const summary = `${__emojiSuccess}Success: ${resultInfo.count.success}  ${__emojiFail}Fail: ${resultInfo.count.fail}   ${__emojiTasks}Tasks: ${____timeDiff(begin, new Date())}s`
-            const nowDate = `${new Date().Format("yyyy-MM-dd HH:mm:ss")} last update`
+            const detail = `${messages.slice(0, __showLine).join("\n")}${messages.length > 20 ? `\n${__emojiUpdateSuccess}......` : ""}`
+            const summary = `${__emojiSuccess}success: ${resultInfo.count.success}  ${__emojiFail}fail: ${resultInfo.count.fail}   ${__emojiTasks}tasks: ${____timeDiff(begin, new Date())}s`
+            const nowDate = `${new Date().Format("yyyy-MM-dd HH:mm:ss")} last updated`
             const lastDate = __tool.read("ScriptLastUpdateDateKey")
-            console.log(`\n${summary}\n${resultInfo.message}\n${lastDate ? lastDate : nowDate}${github.length > 0 ? `\n\n${github}` : ""}`)
-            __tool.notify(`${__emojiDone}Update Done`, summary, `${detail}\n${__emoji}${lastDate ? lastDate : nowDate}${github.length > 0 ? `\n\n${github}` : ""}`)
+            const date = `${__emojiTasks}${lastDate ? lastDate : nowDate}`
+            console.log(`\n${summary}\n${resultInfo.message}${github.length > 0 ? `\n${github}` : ""}\n${date}`)
+            __tool.notify(`${__emojiDone}Update Done`, summary, `${detail}${github.length > 0 ? `\n${github}` : ""}\n${date}`)
             __tool.write(nowDate, "ScriptLastUpdateDateKey")
             __tool.done({})
         })
@@ -341,10 +346,10 @@ async function ____updateGitHub(path, content, message) {
                     } else if (response.status == 404) {
                         resolve(null)
                     } else {
-                        reject("GitHub update file failed: " + body.message)
+                        reject("GitHub update failed: " + body.message)
                     }
                 } else {
-                    reject("GitHub update file failed: " + error)
+                    reject("GitHub update failed: " + error)
                 }
             })
         })
@@ -365,14 +370,14 @@ async function ____updateGitHub(path, content, message) {
                     if (__log) console.log(`updateContent: ${response.status}\n${body}`)
                     body = JSON.parse(body)
                     if (response.status == 200) {
-                        resolve({ url: body.content.download_url, message: "GitHub update file successfully" })
+                        resolve({ url: body.content.download_url, message: `${__emojiGitHub}GitHub updated successfully${sha != body.content.sha ? " (file changes)" : ""}` })
                     } else if (response.status == 201) {
-                        resolve({ url: body.content.download_url, message: "GitHub creat file successfully" })
+                        resolve({ url: body.content.download_url, message: `${__emojiGitHub}GitHub file created successfully` })
                     } else {
-                        reject("GitHub update file failed: " + body.message)
+                        reject("GitHub update failed: " + body.message)
                     }
                 } else {
-                    reject("GitHub update file failed: " + error)
+                    reject("GitHub update failed: " + error)
                 }
             })
         })
@@ -421,15 +426,15 @@ function ____downloadFile(url) {
             if (!error) {
                 const code = response.statusCode
                 if (code == 200) {
-                    console.log(`update success: ${url}`)
-                    resolve({ url, code, body, message: `${__emoji}${filename} update success` })
+                    console.log(`updated successfully: ${url}`)
+                    resolve({ url, code, body, message: `${__emojiUpdateSuccess}${filename} updated successfully` })
                 } else {
-                    console.log(`update fail ${response.statusCode}: ${url}`)
-                    resolve({ url, code, body, message: `${__emoji}${filename} update fail` })
+                    console.log(`update failed ${response.statusCode}: ${url}`)
+                    resolve({ url, code, body, message: `${__emojiUpdateFail}${filename} update failed` })
                 }
             } else {
-                console.log(`update fail ${error}`)
-                resolve({ url, code: null, body: null, message: `${__emoji}${filename} update fail` })
+                console.log(`updated faile ${error}`)
+                resolve({ url, code: null, body: null, message: `${__emojiUpdateFail}${filename} update failed` })
             }
         })
     })
@@ -461,6 +466,7 @@ function ____parseRemoteConf(conf) {
     for (let i = 0, len = lines.length; i < len; i++) {
         const eval = /^(.+)\s+eval\s+(.+)$/
         const surge = /^http\s*-\s*(request|response)\s+(\S+)\s+(.+)$/
+        const newSurge = /^\S+.js\s+=\s(.+)$/
         const quanx = /^(\S+)\s+url\s+script\s*-\s*(\S+)\s*-\s*(?:header|body)\s+(\S+)$/
         let line = lines[i].trim()
         if (line.length > 0) {
@@ -468,7 +474,7 @@ function ____parseRemoteConf(conf) {
                 line = line.replace(/^#*/, "")
                 newLines.push(line)
             } else if (/^(?!;|#|\/\/).*/.test(line)) {
-                if (eval.test(line) || surge.test(line)) {
+                if (eval.test(line) || surge.test(line) || newSurge.test(line)) {
                     newLines.push(line)
                 }
                 if (quanx.test(line)) {
@@ -495,16 +501,19 @@ function ____parseConf(lines) {
         if (line.length > 0 && line.substring(0, 2) != "//" && line.substring(0, 1) != "#") {
             const eval = /^(.+)\s+eval\s+(.+)$/
             const surge = /^http\s*-\s*(request|response)\s+(\S+)\s+(.+)$/
+            const newSurge = /^\S+.js\s+=\s(.+)$/
             const quanx = /^(\S+)\s+url\s+script\s*-\s*(\S+)\s+(\S+\.js)$/
             if (surge.test(line)) {
                 const result = line.match(surge)
                 // content
                 const requiresBody = ____surgeArg(result[3].trim()).requiresBody
-                surgeConfContents.push(`${line.replace(____surgeArg(result[3].trim()).scriptPath, "eval_script.js")}`)
+                // surgeConfContents.splice(i, 0, `${line.replace(____surgeArg(result[3].trim()).scriptPath, "eval_script.js")}`);
+                surgeConfContents.push(`eval_script.js = type=http-${result[1].trim()},${requiresBody ? `requires-body=${requiresBody},` : ""}pattern=${result[2].trim()},script-path=eval_script.js`)
                 quanxConfContents.push(`${result[2].trim()} url script-${result[1].trim()}-${requiresBody == "1" ? "body" : "header"} eval_script.js`)
                 // eval
                 line = `${result[1].trim()} ${result[2].trim()} eval ${____surgeArg(result[3].trim()).scriptPath}`
-            } else if (quanx.test(line)) {
+            }
+            else if (quanx.test(line)) {
                 const result = line.match(quanx)
                 const type = result[2].split("-")
                 // content
@@ -516,11 +525,21 @@ function ____parseConf(lines) {
                         requires = 1
                     }
                 }
-                surgeConfContents.push(`http-${type[0].trim()} ${result[1].trim()} ${requires == 0 ? "" : `requires-body=${requires},`}script-path=eval_script.js`)
+                // surgeConfContents.splice(i, 0, `http-${type[0].trim()} ${result[1].trim()} ${requires == 0 ? "" : `requires-body=${requires},`}script-path=eval_script.js`)
+                surgeConfContents.push(`eval_script.js = type=http-${type[0].trim()},${requires == 0 ? "" : `requires-body=${requires},`}pattern=${result[1].trim()},script-path=eval_script.js`)
                 quanxConfContents.push(`${line.replace(result[3].trim(), "eval_script.js")}`)
                 // eval
                 line = `${type[0].trim()} ${result[1].trim()} eval ${result[3].trim()}`
-
+            }
+            else if (newSurge.test(line)) {
+                //content
+                const result = line.match(newSurge)
+                const surgeArg = ____surgeArg(result[1].trim())
+                surgeConfContents.splice(i, 0, `${surgeArg.type} ${surgeArg.pattern} ${surgeArg.requiresBody ? `requires-body=${surgeArg.requiresBody},` : ""}script-path=eval_script.js`)
+                surgeConfContents.push(`eval_script.js = ${result[1].replace(surgeArg.scriptPath, "eval_script.js")}`)
+                quanxConfContents.push(`${surgeArg.pattern} url script-${surgeArg.type.replace("http-", "")}-${(surgeArg.requiresBody && surgeArg.requiresBody == "1") ? "body" : "header"} eval_script.js`)
+                // eval
+                line = `${surgeArg.type.replace("http-", "")} ${surgeArg.pattern} eval ${surgeArg.scriptPath}`
             }
             if (eval.test(line)) {
                 const value = line.match(eval)
@@ -571,11 +590,19 @@ function ____surgeArg(arg) {
         const item = args[i].trim()
         const path = /^script-path\s*=\s*(\S+)$/
         const requires = /^requires-body\s*=\s*(\S+)$/
+        const pattern = /^pattern\s*=\s*(\S+)$/
+        const type = /^type\s*=\s*(\S+)$/
         if (path.test(item)) {
             surgeArg["scriptPath"] = item.match(path)[1]
         }
         if (requires.test(item)) {
             surgeArg["requiresBody"] = item.match(requires)[1]
+        }
+        if (pattern.test(item)) {
+            surgeArg["pattern"] = item.match(pattern)[1]
+        }
+        if (type.test(item)) {
+            surgeArg["type"] = item.match(type)[1]
         }
     }
     return surgeArg
@@ -628,7 +655,7 @@ function ____Tool() {
     this.done = (obj) => {
         if (_isQuanX) $done(obj)
         if (_isSurge) $done(obj)
-        if (_node) console.log("script Done.");
+        if (_node) console.log("script done.");
     }
     this.notify = (title, subtitle, message) => {
         if (_isQuanX) $notify(title, subtitle, message)
