@@ -1,37 +1,9 @@
 #!name=eval_script.js module
 
 [MITM]
-hostname = %INSERT% music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,api.m.jd.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com,api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com
+hostname = %INSERT% api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,api.m.jd.com,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com,music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com
 
 [Script]
-eval_script.js = type=http-request,pattern=^https?:\/\/music\.163\.com,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.*,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/www\.smzdm\.com\/?.?,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=https?:\/\/.*\.iqiyi\.com\/.*authcookie=,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/credits.bz.mgtv.com\/user\/creditsTake,script-path=eval_script.js
-
-eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,script-path=eval_script.js
-
-eval_script.js = type=http-request,requires-body=1,pattern=^https://node\.kg\.qq\.com/webapp/proxy?,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index,script-path=eval_script.js
-
-eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/passport.suning.com\/ids\/login$,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do,script-path=eval_script.js
-
-eval_script.js = type=http-request,pattern=^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do),script-path=eval_script.js
-
 eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/photos\.adobe\.io\/v2\/accounts*,script-path=eval_script.js
 
 eval_script.js = type=http-response,requires-body=1,pattern=^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig),script-path=eval_script.js
@@ -115,3 +87,31 @@ eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/splice\.o
 eval_script.js = type=http-response,requires-body=1,pattern=^https:\/\/education\.github\.com\/api\/user$,script-path=eval_script.js
 
 eval_script.js = type=http-response,requires-body=1,pattern=https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https?:\/\/music\.163\.com,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.*,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/www\.smzdm\.com\/?.?,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=https?:\/\/.*\.iqiyi\.com\/.*authcookie=,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/credits.bz.mgtv.com\/user\/creditsTake,script-path=eval_script.js
+
+eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,script-path=eval_script.js
+
+eval_script.js = type=http-request,requires-body=1,pattern=^https://node\.kg\.qq\.com/webapp/proxy?,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index,script-path=eval_script.js
+
+eval_script.js = type=http-request,requires-body=1,pattern=^https:\/\/passport.suning.com\/ids\/login$,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do,script-path=eval_script.js
+
+eval_script.js = type=http-request,pattern=^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do),script-path=eval_script.js
