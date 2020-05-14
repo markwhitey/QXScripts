@@ -1,113 +1,113 @@
-hostname = api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,api.m.jd.com,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com,music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com
+hostname = music.163.com,www.flyertea.com,*.smzdm.com,c.tieba.baidu.com,*.iqiyi.com,api.m.jd.com,credits.bz.mgtv.com,i.meituan.com,node.kg.qq.com,sf-integral-sign-in.weixinjia.net,passport.suning.com,luckman.suning.com,sign.suning.com,gameapi.suning.com,api.weibo.cn,mapi.weibo.com,*.uve.weibo.com,mp.weixin.qq.com,api.bilibili.com,app.bilibili.com,*.zhihu.com,aweme*.snssdk.com,*.kuwo.cn,ios.xiaoxiaoapps.com,api*.tiktokv.com,*.musical.ly,*.amemv.com,p.du.163.com,getuserinfo.321mh.com,getuserinfo-globalapi.zymk.cn,ios.fuliapps.com,vsco.co,api.vnision.com,*.my10api.com,sp.kaola.com,r.inews.qq.com,apple.fuliapps.com,newdrugs.dxy.cn,app101.avictown.cc,api.hlo.xyz,api.ijo.xyz,www.luqijianggushi.com,account.wps.cn,u.kanghuayun.com,api.gyrosco.pe,api1.dobenge.cn,api.mvmtv.com,mitaoapp.yeduapp.com,origin-prod-phoenix.jibjab.com,www.3ivf.com,pay.guoing.com,api.termius.com,api.bjxkhc.com,viva.v21xy.com,dida365.com,ticktick.com,biz.caiyunapp.com,api.gotokeep.com,ap*.intsig.net,mp.bybutter.com,api.vuevideo.net,api.picsart.c*,api.meiease.c*,splice.oracle.*.com,ios.xiangjiaoapps.com,apple.xiangjiaoapps.com,*.xiangxiangapps.com,apic.musixmatch.com,pan.baidu.com,api.unfold.app,api.calm.com,education.github.com,api.rr.tv,trade-acs.m.taobao.com,amdc.m.taobao.com,photos.adobe.io,mobile-api.adguard.com
 
-^https:\/\/photos\.adobe\.io\/v2\/accounts* url script-response-body eval_script.js
+^https?:\/\/music\.163\.com url script-request-header eval.js
 
-^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig) url script-response-body eval_script.js
+^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.* url script-request-header eval.js
 
-^http://amdc\.m\.taobao\.com/amdc/mobileDispatch url script-response-body eval_script.js
+^https:\/\/www\.smzdm\.com\/?.? url script-request-header eval.js
 
-^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail url script-response-body eval_script.js
+https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login url script-request-header eval.js
 
-^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua) url script-response-body eval_script.js
+https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-request-header eval.js
 
-^https?://m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|searchall|cardlist|page|!/photos/pic_recommend_status) url script-response-body eval_script.js
+https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header eval.js
 
-^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad url script-response-body eval_script.js
+^https:\/\/credits.bz.mgtv.com\/user\/creditsTake url script-request-header eval.js
 
-^https?:\/\/api\.zhihu\.com\/(moments\?(action|feed_type)|topstory\/recommend|.*\/questions|market\/header|people) url script-response-body eval_script.js
+^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body eval.js
 
-^https://aweme-eagle(.*)\.snssdk\.com\/aweme/.+/(feed|aweme/post|follow/feed)/ url script-response-body eval_script.js
+^https://node\.kg\.qq\.com/webapp/proxy? url script-request-body eval.js
 
-^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) url script-response-body eval_script.js
+^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index url script-request-header eval.js
 
-https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) url script-response-body eval_script.js
+^https:\/\/passport.suning.com\/ids\/login$ url script-request-body eval.js
 
-^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index) url script-response-body eval_script.js
+^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do url script-request-header eval.js
 
-^https?:\/\/p\.du\.163\.com\/gain\/readtime\/info\.json url script-response-body eval_script.js
+^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do url script-request-header eval.js
 
-^https?:\/\/getuserinfo\.321mh\.com\/app_api\/v5\/getuserinfo\/ url script-response-body eval_script.js
+^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do) url script-request-header eval.js
 
-^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coin_account|getuserinfo_ticket|getcomicinfo)/ url script-response-body eval_script.js
+^https:\/\/photos\.adobe\.io\/v2\/accounts* url script-response-body eval.js
 
-^https?:\/\/api\.bilibili\.com\/pgc\/player\/api\/playurl url script-response-body eval_script.js
+^https?://api\.m\.jd\.com/client\.action\?functionId=(wareBusiness|serverConfig) url script-response-body eval.js
 
-^https?:\/\/vsco\.co\/api\/subscriptions\/2.1\/user-subscriptions\/ url script-response-body eval_script.js
+^http://amdc\.m\.taobao\.com/amdc/mobileDispatch url script-response-body eval.js
 
-^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) url script-response-body eval_script.js
+^https?://trade-acs\.m\.taobao\.com/gw/mtop\.taobao\.detail\.getdetail url script-response-body eval.js
 
-^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ url script-response-body eval_script.js
+^https?://(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua) url script-response-body eval.js
 
-^https://sp\.kaola\.com/api/openad$ url script-response-body eval_script.js
+^https?://m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|searchall|cardlist|page|!/photos/pic_recommend_status) url script-response-body eval.js
 
-^https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList) url script-response-body eval_script.js
+^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad url script-response-body eval.js
 
-^https?:\/\/.*\.(fuli|xiang(jiao|xiang))apps\.com\/(ucp\/index|getGlobalData|.+\/reqplay\/) url script-response-body eval_script.js
+^https?:\/\/api\.zhihu\.com\/(moments\?(action|feed_type)|topstory\/recommend|.*\/questions|market\/header|people) url script-response-body eval.js
 
-^https?:\/\/(i|newdrugs)\.dxy\.cn\/(snsapi\/username\/|app\/user\/(pro\/stat\?|init\?timestamp=)) url script-response-body eval_script.js
+^https://aweme-eagle(.*)\.snssdk\.com\/aweme/.+/(feed|aweme/post|follow/feed)/ url script-response-body eval.js
 
-^https?:\/\/(.+)\.(\w{2,3})(:?\d*)\/(api\/public\/\?service=Live\.checkLive$|public\/\/\?service=Live\.roomCharge$|lg\/video\/loadVideoFees\.do$) url script-response-body eval_script.js
+^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) url script-response-body eval.js
 
-^https:\/\/www\.luqijianggushi\.com\/api\/v2\/user\/get url script-response-body eval_script.js
+https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) url script-response-body eval.js
 
-^https://account.wps.cn/api/users/ url script-response-body eval_script.js
+^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index) url script-response-body eval.js
 
-^https:\/\/api\.gyrosco\.pe\/v1\/account\/$ url script-response-body eval_script.js
+^https?:\/\/p\.du\.163\.com\/gain\/readtime\/info\.json url script-response-body eval.js
 
-^https:\/\/api1\.dobenge\.cn\/api\/user\/getuserinfo url script-response-body eval_script.js
+^https?:\/\/getuserinfo\.321mh\.com\/app_api\/v5\/getuserinfo\/ url script-response-body eval.js
 
-^https:\/\/api\.mvmtv\.com\/index\.php.*(c=user.*a=info|a=addr.*vid=.*) url script-response-body eval_script.js
+^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coin_account|getuserinfo_ticket|getcomicinfo)/ url script-response-body eval.js
 
-^https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user url script-response-body eval_script.js
+^https?:\/\/api\.bilibili\.com\/pgc\/player\/api\/playurl url script-response-body eval.js
 
-https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body eval_script.js
+^https?:\/\/vsco\.co\/api\/subscriptions\/2.1\/user-subscriptions\/ url script-response-body eval.js
 
-^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip url script-response-body eval_script.js
+^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) url script-response-body eval.js
 
-^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status url script-response-body eval_script.js
+^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ url script-response-body eval.js
 
-^https:\/\/biz\.caiyunapp\.com\/v2\/user\?app_name\=weather url script-response-body eval_script.js
+^https://sp\.kaola\.com/api/openad$ url script-response-body eval.js
 
-^https:\/\/api\.gotokeep\.com\/(.+\/subject|.+\/dynamic) url script-response-body eval_script.js
+^https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList) url script-response-body eval.js
 
-^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\? url script-response-body eval_script.js
+^https?:\/\/.*\.(fuli|xiang(jiao|xiang))apps\.com\/(ucp\/index|getGlobalData|.+\/reqplay\/) url script-response-body eval.js
 
-^https:\/\/api\.vuevideo\.net\/api\/v1\/(users\/.+\/profile|subtitle\/prepare) url script-response-body eval_script.js
+^https?:\/\/(i|newdrugs)\.dxy\.cn\/(snsapi\/username\/|app\/user\/(pro\/stat\?|init\?timestamp=)) url script-response-body eval.js
 
-^https?:\/\/mp\.bybutter\.com\/mood\/(official-templates|privileges) url script-response-body eval_script.js
+^https?:\/\/(.+)\.(\w{2,3})(:?\d*)\/(api\/public\/\?service=Live\.checkLive$|public\/\/\?service=Live\.roomCharge$|lg\/video\/loadVideoFees\.do$) url script-response-body eval.js
 
-^https:\/\/api\.(picsart|meiease)\.c(n|om)\/users\/show\/me\.json url script-response-body eval_script.js
+^https:\/\/www\.luqijianggushi\.com\/api\/v2\/user\/get url script-response-body eval.js
 
-^https:\/\/splice\.oracle\.\w+\.com\/devices\/me url script-response-body eval_script.js
+^https://account.wps.cn/api/users/ url script-response-body eval.js
 
-^https:\/\/education\.github\.com\/api\/user$ url script-response-body  eval_script.js
+^https:\/\/api\.gyrosco\.pe\/v1\/account\/$ url script-response-body eval.js
 
-https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user url script-response-body  eval_script.js
+^https:\/\/api1\.dobenge\.cn\/api\/user\/getuserinfo url script-response-body eval.js
 
-^https?:\/\/music\.163\.com url script-request-header eval_script.js
+^https:\/\/api\.mvmtv\.com\/index\.php.*(c=user.*a=info|a=addr.*vid=.*) url script-response-body eval.js
 
-^https:\/\/www\.flyertea\.com\/source\/plugin\/mobile\/mobile\.php\?module=getdata&.* url script-request-header eval_script.js
+^https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user url script-response-body eval.js
 
-^https:\/\/www\.smzdm\.com\/?.? url script-request-header eval_script.js
+https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body eval.js
 
-https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login url script-request-header eval_script.js
+^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip url script-response-body eval.js
 
-https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-request-header eval_script.js
+^https:\/\/(ticktick|dida365)\.com\/api\/v2\/user\/status url script-response-body eval.js
 
-https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header eval_script.js
+^https:\/\/biz\.caiyunapp\.com\/v2\/user\?app_name\=weather url script-response-body eval.js
 
-^https:\/\/credits.bz.mgtv.com\/user\/creditsTake url script-request-header eval_script.js
+^https:\/\/api\.gotokeep\.com\/(.+\/subject|.+\/dynamic) url script-response-body eval.js
 
-^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body eval_script.js
+^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\? url script-response-body eval.js
 
-^https://node\.kg\.qq\.com/webapp/proxy? url script-request-body eval_script.js
+^https:\/\/api\.vuevideo\.net\/api\/v1\/(users\/.+\/profile|subtitle\/prepare) url script-response-body eval.js
 
-^https:\/\/sf-integral-sign-in.weixinjia.net\/app\/index url script-request-header eval_script.js
+^https?:\/\/mp\.bybutter\.com\/mood\/(official-templates|privileges) url script-response-body eval.js
 
-^https:\/\/passport.suning.com\/ids\/login$ url script-request-body eval_script.js
+^https:\/\/api\.(picsart|meiease)\.c(n|om)\/users\/show\/me\.json url script-response-body eval.js
 
-^https:\/\/luckman.suning.com\/luck-web\/sign\/api\/clock_sign.do url script-request-header eval_script.js
+^https:\/\/splice\.oracle\.\w+\.com\/devices\/me url script-response-body eval.js
 
-^https:\/\/sign.suning.com\/sign-web\/m\/promotion\/sign\/doSign.do url script-request-header eval_script.js
+^https:\/\/education\.github\.com\/api\/user$ url script-response-body  eval.js
 
-^https:\/\/gameapi.suning.com\/sngame-web\/(api\/signin\/private\/customerSignOperation.do|gateway\/api\/queryPrize.do) url script-request-header eval_script.js
+https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user url script-response-body  eval.js
