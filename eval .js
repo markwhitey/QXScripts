@@ -7,7 +7,7 @@ https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Js.conf
 `
 
 // 是否更新 GitHub（如果开启 true，需配置 token 或 账号密码）
-const __isUpdateGithub = false
+const __isUpdateGithub = true
 // GitHub Token（如果使用账号密码 token 请设置为空 ""）
 const __token = ""
 // GitHub 账号
