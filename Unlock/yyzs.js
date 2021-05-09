@@ -20,7 +20,7 @@ body = JSON.parse(body);
 body.items.expertUser = true;
 body.items.expert = true;
 body.items.expertStatus = 1;
-body.items.professional = true;
+body.items.professional = true
 body.items.money = 999;
 body = JSON.stringify(body);
 }
