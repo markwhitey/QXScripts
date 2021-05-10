@@ -1,7 +1,7 @@
 var body = $response.body;
 var url = $request.url;
 
-const path1 = '/api/v1/user/profile/';
+const path1 = '/api/v1/user/profile?';
 
 
 let obj = JSON.parse(body);
